@@ -1,0 +1,26 @@
+{
+  "name": "minecraft-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aufyx/minecraft-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aufyx/minecraft-website/issues"
+  },
+  "homepage": "https://github.com/aufyx/minecraft-website#readme",
+  "dependencies": {
+    "snowpack": "^3.0.13",
+    "stats.js": "^0.17.0",
+    "three": "^0.126.1"
+  }
+}
