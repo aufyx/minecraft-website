@@ -22,7 +22,6 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
 renderer.gammaOutput = true;
-//renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 canvasContainer.appendChild( renderer.domElement );
 
@@ -43,7 +42,6 @@ sunLight.position.set(-50, 40, 10);
 sunLight.target.position.set(0, 0, 0);
 
 sunLight.castShadow = true; 
-
 sunLight.shadow.mapSize.width = 8192; 
 sunLight.shadow.mapSize.height = 8192; 
 sunLight.shadow.camera.left = -100;
@@ -56,9 +54,7 @@ scene.add( helper );
 scene.add(sunLight);
 scene.add(sunLight.target);
 
-//const clock = new THREE.Clock();
-
-//Create a sphere that cast shadows 
+/* Extra Models To Show Lights Work */
 const sphereGeometry = new THREE.SphereGeometry( 1, 32, 32 );
 const sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
@@ -81,19 +77,20 @@ const loader = new GLTFLoader();
 loader.load( 'models/CubeHouseDemo.glb',
   //This doesn't recieve shadows :/
   //CubeHouseExported.gltf does! But the textures are messed up by blender. :(
-  //The key difference is that the .gltf loads with 
 	function ( gltf ) {
 		
     gltf.scene.traverse( function ( child ) {
-      //And awkward update of encoding is required to load the Image Based Lighting correctly.
+
       if ( child.isMesh ) {
         child.castShadow = true;
         child.receiveShadow = true;
+
+        /*
+        //Changing these doesn't make a difference.
         child.material.roughness = 1;
         child.material.shadowSide = THREE.DoubleSide;
         child.material.side = THREE.DoubleSide;
-        //child.material.isGLTFSpecularGlossinessMaterial = false;
-
+        */
       }
     });
 
@@ -118,6 +115,7 @@ function onWindowResize() {
 }
 
 /* Click to Find Object */
+// Used for debugging.
 const raycaster = new THREE.Raycaster();
 
 function onClick( event ) {
@@ -134,14 +132,10 @@ function onClick( event ) {
 
 renderer.domElement.addEventListener('click', onClick, false);
 
-/* Animation */
+
 const animate = function () {
   stats.begin();
-
-  //var delta = clock.getDelta();
-
   renderer.render( scene, camera );
-  
   stats.end();
 
   requestAnimationFrame( animate );
