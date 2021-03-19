@@ -18,10 +18,11 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 camera.position.z = 8;
 camera.position.y = 6;
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGL1Renderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
-renderer.gammaOutput = true;
+renderer.outputEncoding = THREE.sRGBEncoding;
+//renderer.gammaOutput = true;
 
 canvasContainer.appendChild( renderer.domElement );
 
@@ -42,8 +43,8 @@ sunLight.position.set(-50, 40, 10);
 sunLight.target.position.set(0, 0, 0);
 
 sunLight.castShadow = true; 
-sunLight.shadow.mapSize.width = 8192; 
-sunLight.shadow.mapSize.height = 8192; 
+//sunLight.shadow.mapSize.width = 8192; 
+//sunLight.shadow.mapSize.height = 8192; 
 sunLight.shadow.camera.left = -100;
 sunLight.shadow.camera.bottom = -100;
 sunLight.shadow.camera.right = 100;
