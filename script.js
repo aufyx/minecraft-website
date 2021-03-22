@@ -86,6 +86,8 @@ loader.load( 'models/CubeHouseDemo.glb',
         child.castShadow = true;
         child.receiveShadow = true;
 
+        child.geometry.computeVertexNormals(); // FIX
+
         /*
         //Changing these doesn't make a difference.
         child.material.roughness = 1;
